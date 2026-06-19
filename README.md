@@ -9,7 +9,7 @@ Free to use. No strings attached. No tickets required.
 
 📄 **GDPR** — the full regulation text  
 📋 **EDPB** — selected publications and guidelines  
-⚖️ **CJEU** — selected decisions related to the GDPR  
+⚖️ **CJEU** — selected decisions related to the GDPR (until 2026-06-19)
 
 All documents are in PDF format.
 
