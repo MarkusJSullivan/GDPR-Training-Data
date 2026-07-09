@@ -8,8 +8,8 @@ Free to use. No strings attached. No tickets required.
 ## What's in here
 
 📄 **GDPR** — the full regulation text  
-📋 **EDPB** — selected publications and guidelines  
-⚖️ **CJEU** — selected decisions related to the GDPR (until 2026-06-19)
+📋 **EDPB** — selected publications and guidelines (until 2026-07-09)
+⚖️ **CJEU** — selected decisions related to the GDPR (until 2026-07-09)
 
 All documents are in PDF format.
 
