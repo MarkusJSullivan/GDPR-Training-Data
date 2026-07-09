@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Anonymisation" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.16.0">
+  <bpmn2:process id="Process_Anonymisation" name="Assessment of anonymity of data" isExecutable="false">
+    <bpmn2:startEvent id="S1" name="Data set to be assessed">
+      <bpmn2:outgoing>f1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:task id="T1" name="Describe the situation">
+      <bpmn2:incoming>f1</bpmn2:incoming>
+      <bpmn2:outgoing>f2</bpmn2:outgoing>
+    </bpmn2:task>
+    <bpmn2:exclusiveGateway id="G1" name="Is it obvious that the data is not anonymous? (for example because it contains e-mail, phone numbers, etc.) (See 51.)">
+      <bpmn2:incoming>f2</bpmn2:incoming>
+      <bpmn2:outgoing>f3</bpmn2:outgoing>
+      <bpmn2:outgoing>f4</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:endEvent id="E1" name="Consider data as personal">
+      <bpmn2:incoming>f3</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:exclusiveGateway id="G2" name="Are you using the simplified or contextual approach? (See para 47)">
+      <bpmn2:incoming>f4</bpmn2:incoming>
+      <bpmn2:outgoing>f5</bpmn2:outgoing>
+      <bpmn2:outgoing>f6</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:exclusiveGateway id="G3" name="Could the given data be extended by information obtained from Linkage and/or Inference? (see 73, 103 and 104)">
+      <bpmn2:incoming>f5</bpmn2:incoming>
+      <bpmn2:outgoing>f7</bpmn2:outgoing>
+      <bpmn2:outgoing>f11</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:task id="T2" name="Consider from now the data as extended as possible">
+      <bpmn2:incoming>f7</bpmn2:incoming>
+      <bpmn2:outgoing>f8</bpmn2:outgoing>
+    </bpmn2:task>
+    <bpmn2:exclusiveGateway id="G4" name="Is it obvious that the (extended) data is not anonymous? (see 51)">
+      <bpmn2:incoming>f8</bpmn2:incoming>
+      <bpmn2:outgoing>f9</bpmn2:outgoing>
+      <bpmn2:outgoing>f10</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:endEvent id="E2" name="Consider data as personal">
+      <bpmn2:incoming>f9</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:exclusiveGateway id="G5" name="Does the data meet all of the three criteria (No Inference, No Linkage and No Record Isolation)? (see 3.4)">
+      <bpmn2:incoming>f10</bpmn2:incoming>
+      <bpmn2:incoming>f11</bpmn2:incoming>
+      <bpmn2:outgoing>f12</bpmn2:outgoing>
+      <bpmn2:outgoing>f13</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:endEvent id="E3" name="Consider data as anonymous">
+      <bpmn2:incoming>f12</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:exclusiveGateway id="G6" name="Do you violate only the No Record Isolation criterion but singling out is not possible? (see 100-102)">
+      <bpmn2:incoming>f13</bpmn2:incoming>
+      <bpmn2:outgoing>f14</bpmn2:outgoing>
+      <bpmn2:outgoing>f15</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:endEvent id="E4" name="Consider data as anonymous">
+      <bpmn2:incoming>f14</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:exclusiveGateway id="G7" name="Do you wish to stop here and treat the data as personal, or choose to invest in a contextualised analysis?">
+      <bpmn2:incoming>f15</bpmn2:incoming>
+      <bpmn2:outgoing>f16</bpmn2:outgoing>
+      <bpmn2:outgoing>f17</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:endEvent id="E5" name="Consider data as personal">
+      <bpmn2:incoming>f16</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:exclusiveGateway id="GM" name="">
+      <bpmn2:incoming>f6</bpmn2:incoming>
+      <bpmn2:incoming>f17</bpmn2:incoming>
+      <bpmn2:outgoing>f18</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:subProcess id="SP1" name="Contextual analysis">
+      <bpmn2:incoming>f18</bpmn2:incoming>
+      <bpmn2:startEvent id="S2" name="">
+        <bpmn2:outgoing>f19</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="T3" name="For whom is the data intended to be anonymous? Determine relevant entities, applicable perspectives and MRLTBU. (para. 22 and 32.)">
+        <bpmn2:incoming>f19</bpmn2:incoming>
+        <bpmn2:outgoing>f20</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:exclusiveGateway id="G8" name="For each relevant entity, could the given data be extended by information obtained from Linkage and/or Inference with MRLTBU? (see 73, 103, 104)">
+        <bpmn2:incoming>f20</bpmn2:incoming>
+        <bpmn2:outgoing>f21</bpmn2:outgoing>
+        <bpmn2:outgoing>f25</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:task id="T4" name="Consider from now for that entity the data as extended as possible">
+        <bpmn2:incoming>f21</bpmn2:incoming>
+        <bpmn2:outgoing>f22</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:exclusiveGateway id="G9" name="Is it obvious that the (extended) data is not anonymous for some relevant entities? (see 51)">
+        <bpmn2:incoming>f22</bpmn2:incoming>
+        <bpmn2:outgoing>f23</bpmn2:outgoing>
+        <bpmn2:outgoing>f24</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:endEvent id="E6" name="Consider data as personal for those relevant entities">
+        <bpmn2:incoming>f23</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:exclusiveGateway id="G10" name="Does the data meet the three criteria met for all relevant entities considering MRLTBU?">
+        <bpmn2:incoming>f24</bpmn2:incoming>
+        <bpmn2:incoming>f25</bpmn2:incoming>
+        <bpmn2:outgoing>f26</bpmn2:outgoing>
+        <bpmn2:outgoing>f27</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:endEvent id="E7" name="Consider data as anonymous">
+        <bpmn2:incoming>f26</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:exclusiveGateway id="G11" name="Is it possible to do any specific and meaningful inference for at least one relevant entity?">
+        <bpmn2:incoming>f27</bpmn2:incoming>
+        <bpmn2:outgoing>f28</bpmn2:outgoing>
+        <bpmn2:outgoing>f29</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:endEvent id="E8" name="Data are likely to be personal for those relevant entities">
+        <bpmn2:incoming>f28</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:exclusiveGateway id="G12" name="Do you violate only the No Record Isolation criterion for some entities but singling out is not possible for them by MRLTBU? (see 100-102)">
+        <bpmn2:incoming>f29</bpmn2:incoming>
+        <bpmn2:outgoing>f30</bpmn2:outgoing>
+        <bpmn2:outgoing>f31</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:endEvent id="E9" name="Consider data as anonymous">
+        <bpmn2:incoming>f30</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:endEvent id="E10" name="Data are likely to be personal for those relevant entities">
+        <bpmn2:incoming>f31</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:sequenceFlow id="f19" sourceRef="S2" targetRef="T3" />
+      <bpmn2:sequenceFlow id="f20" sourceRef="T3" targetRef="G8" />
+      <bpmn2:sequenceFlow id="f21" name="YES" sourceRef="G8" targetRef="T4" />
+      <bpmn2:sequenceFlow id="f22" sourceRef="T4" targetRef="G9" />
+      <bpmn2:sequenceFlow id="f23" name="YES" sourceRef="G9" targetRef="E6" />
+      <bpmn2:sequenceFlow id="f24" name="NO" sourceRef="G9" targetRef="G10" />
+      <bpmn2:sequenceFlow id="f25" name="NO" sourceRef="G8" targetRef="G10" />
+      <bpmn2:sequenceFlow id="f26" name="YES" sourceRef="G10" targetRef="E7" />
+      <bpmn2:sequenceFlow id="f27" name="NO" sourceRef="G10" targetRef="G11" />
+      <bpmn2:sequenceFlow id="f28" name="YES" sourceRef="G11" targetRef="E8" />
+      <bpmn2:sequenceFlow id="f29" name="NO" sourceRef="G11" targetRef="G12" />
+      <bpmn2:sequenceFlow id="f30" name="YES, not possible" sourceRef="G12" targetRef="E9" />
+      <bpmn2:sequenceFlow id="f31" name="NO" sourceRef="G12" targetRef="E10" />
+    </bpmn2:subProcess>
+    <bpmn2:sequenceFlow id="f1" sourceRef="S1" targetRef="T1" />
+    <bpmn2:sequenceFlow id="f2" sourceRef="T1" targetRef="G1" />
+    <bpmn2:sequenceFlow id="f3" name="YES" sourceRef="G1" targetRef="E1" />
+    <bpmn2:sequenceFlow id="f4" name="NO" sourceRef="G1" targetRef="G2" />
+    <bpmn2:sequenceFlow id="f5" name="SIMPLIFIED" sourceRef="G2" targetRef="G3" />
+    <bpmn2:sequenceFlow id="f6" name="CONTEXTUAL" sourceRef="G2" targetRef="GM" />
+    <bpmn2:sequenceFlow id="f7" name="YES" sourceRef="G3" targetRef="T2" />
+    <bpmn2:sequenceFlow id="f8" sourceRef="T2" targetRef="G4" />
+    <bpmn2:sequenceFlow id="f9" name="YES" sourceRef="G4" targetRef="E2" />
+    <bpmn2:sequenceFlow id="f10" name="NO" sourceRef="G4" targetRef="G5" />
+    <bpmn2:sequenceFlow id="f11" name="NO" sourceRef="G3" targetRef="G5" />
+    <bpmn2:sequenceFlow id="f12" name="YES" sourceRef="G5" targetRef="E3" />
+    <bpmn2:sequenceFlow id="f13" name="NO" sourceRef="G5" targetRef="G6" />
+    <bpmn2:sequenceFlow id="f14" name="YES" sourceRef="G6" targetRef="E4" />
+    <bpmn2:sequenceFlow id="f15" name="NO" sourceRef="G6" targetRef="G7" />
+    <bpmn2:sequenceFlow id="f16" name="STOP" sourceRef="G7" targetRef="E5" />
+    <bpmn2:sequenceFlow id="f17" name="CONTEXTUAL" sourceRef="G7" targetRef="GM" />
+    <bpmn2:sequenceFlow id="f18" sourceRef="GM" targetRef="SP1" />
+    <bpmn2:textAnnotation id="A1">
+      <bpmn2:text>Which data is concerned?
+Where and how is it stored?
+What information could help re-identification?</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="a1" sourceRef="T1" targetRef="A1" />
+    <bpmn2:textAnnotation id="A2">
+      <bpmn2:text>* MRLTBU = Means reasonably likely to be used for re-identification</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="a2" sourceRef="SP1" targetRef="A2" />
+    <bpmn2:textAnnotation id="A3">
+      <bpmn2:text>If it is difficult to assess for each relevant entity, which means it is reasonably likely to use for re-identification, consider using the simple approach.</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="a3" sourceRef="SP1" targetRef="A3" />
+    <bpmn2:textAnnotation id="A4">
+      <bpmn2:text>NB: If the data are assessed to be anonymous for an entity, but that entity is reasonably likely to transfer the data to another entity that has means reasonably likely to be used for re-identification, they would indirectly become personal for the first entity, even if it would not otherwise have the means to identify the individuals in question. (See para 21.)</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="a4" sourceRef="SP1" targetRef="A4" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Process_Anonymisation">
+      <bpmndi:BPMNShape id="S1_di" bpmnElement="S1">
+        <dc:Bounds x="502" y="60" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="555" y="64" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T1_di" bpmnElement="T1">
+        <dc:Bounds x="430" y="140" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G1_di" bpmnElement="G1" isMarkerVisible="true">
+        <dc:Bounds x="495" y="280" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="556" y="252" width="87" height="106" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E1_di" bpmnElement="E1">
+        <dc:Bounds x="252" y="287" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="228" y="336" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G2_di" bpmnElement="G2" isMarkerVisible="true">
+        <dc:Bounds x="495" y="400" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="477" y="457" width="86" height="66" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G4_di" bpmnElement="G4" isMarkerVisible="true">
+        <dc:Bounds x="345" y="715" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="405" y="707" width="88" height="66" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E2_di" bpmnElement="E2">
+        <dc:Bounds x="182" y="722" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="774" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G5_di" bpmnElement="G5" isMarkerVisible="true">
+        <dc:Bounds x="345" y="835" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="823" width="90" height="93" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E3_di" bpmnElement="E3">
+        <dc:Bounds x="182" y="842" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="893" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G6_di" bpmnElement="G6" isMarkerVisible="true">
+        <dc:Bounds x="345" y="955" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="409" y="933" width="80" height="93" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E4_di" bpmnElement="E4">
+        <dc:Bounds x="182" y="962" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="1006" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G7_di" bpmnElement="G7" isMarkerVisible="true">
+        <dc:Bounds x="345" y="1075" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="330" y="1147" width="80" height="106" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E5_di" bpmnElement="E5">
+        <dc:Bounds x="182" y="1082" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="1123" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GM_di" bpmnElement="GM" isMarkerVisible="true">
+        <dc:Bounds x="855" y="455" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T2_di" bpmnElement="T2">
+        <dc:Bounds x="280" y="600" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G3_di" bpmnElement="G3" isMarkerVisible="true">
+        <dc:Bounds x="345" y="505" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="247" y="483" width="86" height="93" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP1_di" bpmnElement="SP1" isExpanded="true">
+        <dc:Bounds x="680" y="535" width="400" height="915" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S2_di" bpmnElement="S2">
+        <dc:Bounds x="862" y="575" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T3_di" bpmnElement="T3">
+        <dc:Bounds x="790" y="625" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G8_di" bpmnElement="G8" isMarkerVisible="true">
+        <dc:Bounds x="855" y="740" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="977" y="694" width="86" height="132" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T4_di" bpmnElement="T4">
+        <dc:Bounds x="790" y="815" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G9_di" bpmnElement="G9" isMarkerVisible="true">
+        <dc:Bounds x="855" y="930" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="767" y="910" width="85" height="80" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E6_di" bpmnElement="E6">
+        <dc:Bounds x="1012" y="937" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="986" y="982" width="89" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G10_di" bpmnElement="G10" isMarkerVisible="true">
+        <dc:Bounds x="855" y="1030" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="764" y="1023" width="71" height="93" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E7_di" bpmnElement="E7">
+        <dc:Bounds x="1012" y="1037" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="989" y="1086" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G11_di" bpmnElement="G11" isMarkerVisible="true">
+        <dc:Bounds x="855" y="1130" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="766" y="1140" width="87" height="80" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E8_di" bpmnElement="E8">
+        <dc:Bounds x="1012" y="1137" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="990" y="1175" width="82" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G12_di" bpmnElement="G12" isMarkerVisible="true">
+        <dc:Bounds x="855" y="1230" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="757" y="1234" width="85" height="132" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E9_di" bpmnElement="E9">
+        <dc:Bounds x="1012" y="1237" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="988" y="1273" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E10_di" bpmnElement="E10">
+        <dc:Bounds x="862" y="1347" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="839" y="1383" width="82" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f19_di" bpmnElement="f19">
+        <di:waypoint x="880" y="611" />
+        <di:waypoint x="880" y="625" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f20_di" bpmnElement="f20">
+        <di:waypoint x="880" y="705" />
+        <di:waypoint x="880" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f21_di" bpmnElement="f21">
+        <di:waypoint x="880" y="790" />
+        <di:waypoint x="880" y="815" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="884" y="793" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f25_di" bpmnElement="f25">
+        <di:waypoint x="855" y="765" />
+        <di:waypoint x="740" y="765" />
+        <di:waypoint x="740" y="1010" />
+        <di:waypoint x="880" y="1010" />
+        <di:waypoint x="880" y="1030" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="761" y="733" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f22_di" bpmnElement="f22">
+        <di:waypoint x="880" y="895" />
+        <di:waypoint x="880" y="930" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f23_di" bpmnElement="f23">
+        <di:waypoint x="905" y="955" />
+        <di:waypoint x="1012" y="955" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="947" y="930" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f24_di" bpmnElement="f24">
+        <di:waypoint x="880" y="980" />
+        <di:waypoint x="880" y="1030" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="887" y="995" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f26_di" bpmnElement="f26">
+        <di:waypoint x="905" y="1055" />
+        <di:waypoint x="1012" y="1055" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="947" y="1030" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f27_di" bpmnElement="f27">
+        <di:waypoint x="880" y="1080" />
+        <di:waypoint x="880" y="1130" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="887" y="1095" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f28_di" bpmnElement="f28">
+        <di:waypoint x="905" y="1155" />
+        <di:waypoint x="1012" y="1155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="947" y="1130" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f29_di" bpmnElement="f29">
+        <di:waypoint x="880" y="1180" />
+        <di:waypoint x="880" y="1230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="887" y="1195" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f30_di" bpmnElement="f30">
+        <di:waypoint x="905" y="1255" />
+        <di:waypoint x="1012" y="1255" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="915" y="1230" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f31_di" bpmnElement="f31">
+        <di:waypoint x="880" y="1280" />
+        <di:waypoint x="880" y="1347" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="887" y="1304" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="a4_di" bpmnElement="a4">
+        <di:waypoint x="680" y="1232" />
+        <di:waypoint x="550" y="1330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="a2_di" bpmnElement="a2">
+        <di:waypoint x="680" y="1383" />
+        <di:waypoint x="485" y="1410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="a3_di" bpmnElement="a3">
+        <di:waypoint x="680" y="1414" />
+        <di:waypoint x="550" y="1484" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="A1_di" bpmnElement="A1">
+        <dc:Bounds x="230" y="140" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1">
+        <di:waypoint x="520" y="96" />
+        <di:waypoint x="520" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2">
+        <di:waypoint x="520" y="220" />
+        <di:waypoint x="520" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3">
+        <di:waypoint x="495" y="305" />
+        <di:waypoint x="288" y="305" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="380" y="280" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4_di" bpmnElement="f4">
+        <di:waypoint x="520" y="330" />
+        <di:waypoint x="520" y="400" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="527" y="355" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5">
+        <di:waypoint x="495" y="425" />
+        <di:waypoint x="370" y="425" />
+        <di:waypoint x="370" y="505" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="402" y="400" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6_di" bpmnElement="f6">
+        <di:waypoint x="545" y="425" />
+        <di:waypoint x="880" y="425" />
+        <di:waypoint x="880" y="455" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="623" y="400" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f7_di" bpmnElement="f7">
+        <di:waypoint x="370" y="555" />
+        <di:waypoint x="370" y="600" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="374" y="568" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f8_di" bpmnElement="f8">
+        <di:waypoint x="370" y="680" />
+        <di:waypoint x="370" y="715" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f9_di" bpmnElement="f9">
+        <di:waypoint x="345" y="740" />
+        <di:waypoint x="218" y="740" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="270" y="715" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <di:waypoint x="370" y="765" />
+        <di:waypoint x="370" y="835" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="331" y="790" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <di:waypoint x="395" y="530" />
+        <di:waypoint x="550" y="530" />
+        <di:waypoint x="550" y="810" />
+        <di:waypoint x="370" y="810" />
+        <di:waypoint x="370" y="835" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="424" y="503" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <di:waypoint x="345" y="860" />
+        <di:waypoint x="218" y="860" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="270" y="835" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <di:waypoint x="370" y="885" />
+        <di:waypoint x="370" y="955" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="331" y="910" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <di:waypoint x="345" y="980" />
+        <di:waypoint x="218" y="980" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="270" y="955" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <di:waypoint x="370" y="1005" />
+        <di:waypoint x="370" y="1075" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="377" y="1030" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <di:waypoint x="345" y="1100" />
+        <di:waypoint x="218" y="1100" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="267" y="1075" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <di:waypoint x="395" y="1100" />
+        <di:waypoint x="640" y="1100" />
+        <di:waypoint x="640" y="480" />
+        <di:waypoint x="855" y="480" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="453" y="1073" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
+        <di:waypoint x="880" y="505" />
+        <di:waypoint x="880" y="535" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="a1_di" bpmnElement="a1">
+        <di:waypoint x="430" y="180" />
+        <di:waypoint x="400" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="A4_di" bpmnElement="A4">
+        <dc:Bounds x="190" y="1270" width="360" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A2_di" bpmnElement="A2">
+        <dc:Bounds x="190" y="1410" width="360" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A3_di" bpmnElement="A3">
+        <dc:Bounds x="190" y="1470" width="360" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
