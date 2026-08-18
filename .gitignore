@@ -1,0 +1,9 @@
+# Nested tool repo (own git history, gitignored here -- see its own repo)
+gdpr-populator/
+
+# temp fix
+citation-graph/
+
+# Dev/agent-local dotfiles & dotfolders -- except .gitignore itself, which must stay tracked
+.*
+!.gitignore

@@ -11,7 +11,9 @@ Free to use. No strings attached. No tickets required.
 📋 **EDPB** — selected publications and guidelines (until 2026-08-17)  
 ⚖️ **CJEU** — selected decisions related to the GDPR (until 2026-07-16)
 
-All documents are in PDF format.
+Documents are in PDF format. CJEU decisions additionally include the raw scraped HTML
+(`CJEU/htm/`) they were sourced from — same judgment, same license, kept alongside the PDF
+since it retains markup (paragraph/anchor structure) that doesn't survive PDF conversion.
 
 ---
 
